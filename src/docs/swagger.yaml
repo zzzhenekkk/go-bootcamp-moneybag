@@ -1,0 +1,68 @@
+basePath: /
+host: localhost:8080
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: API for managing coin calculations.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Swagger Example API
+  version: "1.0"
+paths:
+  /mincoins:
+    get:
+      description: Calculates the minimum number of coins needed for a given amount
+        using the largest denominations first.
+      parameters:
+      - description: Amount to change
+        in: query
+        name: val
+        required: true
+        type: integer
+      - collectionFormat: csv
+        description: Available denominations
+        in: query
+        items:
+          type: integer
+        name: coins
+        required: true
+        type: array
+      responses:
+        "200":
+          description: List of coins that sum up to the amount
+          schema:
+            items:
+              type: integer
+            type: array
+      summary: Minimum number of coins
+  /mincoins2:
+    get:
+      description: Calculates the minimum number of coins needed for a given amount,
+        optimizes by removing duplicates and sorting denominations in descending order.
+      parameters:
+      - description: Amount to change
+        in: query
+        name: val
+        required: true
+        type: integer
+      - collectionFormat: csv
+        description: Available denominations
+        in: query
+        items:
+          type: integer
+        name: coins
+        required: true
+        type: array
+      responses:
+        "200":
+          description: Optimized list of coins that sum up to the amount
+          schema:
+            items:
+              type: integer
+            type: array
+      summary: Minimum number of coins with optimization
+swagger: "2.0"
